@@ -1,13 +1,19 @@
 #include "sort.h"
 
+void swap(int *array, int i, int j);
+int partition(int *array, int first, int last, size_t size);
+void sort(int *array, int first, int last, size_t size);
+void quick_sort(int *array, size_t size);
+
 /**
  * swap - swaps two elements of an array
+ * @array: The array of integers to be partitioned
  * @i: Index of the first element to be swapped
  * @j: Imdex of the second element
  */
 void swap(int *array, int i, int j)
 {
-	int temp;
+	size_t temp;
 
 	temp = array[i];
 	array[i] = array[j];
@@ -19,10 +25,11 @@ void swap(int *array, int i, int j)
  * @array: The array of integers to be partitioned
  * @first: The index of the first element of the array
  * @last: The index of the last element of the array
+ * @size: The size of the array
  *
  * Return: The index of the pivot used for the partitioning
  */
-int partition(int *array, int first, int last)
+int partition(int *array, int first, int last, size_t size)
 {
 	int pivot, i, j;
 
@@ -33,19 +40,23 @@ int partition(int *array, int first, int last)
 
 	for (j = first; j < last; j++)
 	{
-		if (array[j] < pivot)
+		if ((array[j] < pivot) && (array[++i] != array[j]))
 		{
-			i++;
 			/**
 			 * Swap the current element with the element at the
 			 * temporary pivot index
 			 */
 			swap(array, i, j);
+			print_array(array, size);
 		}
 	}
 	i++;
-	swap(array, i, j);
+	if (array[i] != array[j])
+	{
+		swap(array, i, j);
+		print_array(array, size);
 
+	}
 	return (i);
 }
 
@@ -54,8 +65,9 @@ int partition(int *array, int first, int last)
  * @array: The array of integers to be partitioned.
  * @first: The index of the first element of the array.
  * @last: The index of the last element of the array.
+ * @size: The size of the array.
  */
-void sort(int *array, int first, int last)
+void sort(int *array, int first, int last, size_t size)
 {
 	int pivot;
 
@@ -63,15 +75,14 @@ void sort(int *array, int first, int last)
 		return;
 
 	/* Partition the array with a pivot and get its index */
-	pivot = partition(array, first, last);
+	pivot = partition(array, first, last, size);
+
 
 	/* Sort the first half */
-	sort(array, 0, pivot - 1);
+	sort(array, 0, pivot - 1, size);
 
 	/* Sort the second half */
-	sort(array, pivot + 1, last);
-
-	print_array(array, last + 1);
+	sort(array, pivot + 1, last, size);
 }
 
 /**
@@ -87,5 +98,5 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	sort(array, first, last);
+	sort(array, first, last, size);
 }
