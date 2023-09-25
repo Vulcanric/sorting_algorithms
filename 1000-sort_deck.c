@@ -1,4 +1,4 @@
-#include "sort.h"
+#include "deck.h"
 
 /**
  * sort_deck - sorts a deck of cards.

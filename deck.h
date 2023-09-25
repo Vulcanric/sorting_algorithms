@@ -1,6 +1,8 @@
 #ifndef _DECK_H_
 #define _DECK_H_
 
+#include <stdlib.h>
+
 /**
  * enum kind_e - Enumerating suits
  * @SPADE: Spades suit
