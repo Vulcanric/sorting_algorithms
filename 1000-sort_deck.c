@@ -6,4 +6,6 @@
  */
 void sort_deck(deck_node_t **deck)
 {
+	if (deck == NULL || *deck == NULL || (*deck)->next == NULL)
+		return;
 }
