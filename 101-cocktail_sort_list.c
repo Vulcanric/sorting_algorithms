@@ -1,5 +1,9 @@
 #include "sort.h"
 
+listint_t *swap_right(listint_t **list, listint_t *current);
+listint_t *swap_left(listint_t **list, listint_t *current);
+void cocktail_sort_list(listint_t **list);
+
 /**
  * swap_right - swaps the current node with the adjacent one
  *		in the forward direction
